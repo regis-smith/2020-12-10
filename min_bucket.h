@@ -1,6 +1,7 @@
 #pragma once
-#include <cstddef> // for size_t
 #include <algorithm>
+#include <cstddef> // for size_t
+#include <exception>
 
 // A min_bucket of size n stores the smallest (at most) n
 // objects ever inserted within.
@@ -20,9 +21,6 @@ private:
   int count; // number of objects stored
   T* items = nullptr;
 };
-
-#include "min_bucket.h"
-#include <exception>
 
 template <typename T>
 min_bucket<T>::min_bucket(size_t n): size(n), count(0)
