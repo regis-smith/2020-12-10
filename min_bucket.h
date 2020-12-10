@@ -11,14 +11,14 @@ public:
   min_bucket(size_t);
   ~min_bucket();
   void insert(const T&);
-  int operator[](size_t);
+  T operator[](size_t);
   // make copy constructor and copy assignment unavailable
   min_bucket(const min_bucket&) = delete;
   min_bucket& operator=(const min_bucket&) = delete;
 private:
   const size_t size; // must be initialized
   int count; // number of objects stored
-  int* items = nullptr;
+  T* items = nullptr;
 };
 
 #include "min_bucket.h"
@@ -27,7 +27,7 @@ private:
 template <typename T>
 min_bucket<T>::min_bucket(size_t n): size(n), count(0)
 {
-  items = new int [n+1];
+  items = new T[n+1];
   if (items == nullptr) throw std::exception();
 }
 
@@ -55,7 +55,7 @@ void min_bucket<T>::insert(const T& x)
 }
 
 template <typename T>
-int min_bucket<T>::operator[](size_t n)
+T min_bucket<T>::operator[](size_t n)
 {
   if (n >= size) throw std::exception();
   return items[n];
