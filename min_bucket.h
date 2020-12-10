@@ -18,7 +18,7 @@ public:
 private:
   const size_t size; // must be initialized
   int count; // number of objects stored
-  int* nums = nullptr;
+  int* items = nullptr;
 };
 
 #include "min_bucket.h"
@@ -27,28 +27,28 @@ private:
 template <typename T>
 min_bucket<T>::min_bucket(size_t n): size(n), count(0)
 {
-  nums = new int [n+1];
-  if (nums == nullptr) throw std::exception();
+  items = new int [n+1];
+  if (items == nullptr) throw std::exception();
 }
 
 template <typename T>
 min_bucket<T>::~min_bucket()
 {
-  delete [] nums;
+  delete [] items;
 }
 
 template <typename T>
 void min_bucket<T>::insert(const T& x)
 {
   if (count < size) {
-    nums[count] = x;
+    items[count] = x;
   }
   else { // full
-    nums[size] = x; // place x at the end
+    items[size] = x; // place x at the end
   }
   int i = count-1;
-  while (i >= 0  && nums[i] > nums[i+1]) {
-    std::swap(nums[i], nums[i+1]);
+  while (i >= 0  && items[i] > items[i+1]) {
+    std::swap(items[i], items[i+1]);
     i--;
   }
   if (count < size) count++;
@@ -58,5 +58,5 @@ template <typename T>
 int min_bucket<T>::operator[](size_t n)
 {
   if (n >= size) throw std::exception();
-  return nums[n];
+  return items[n];
 }
