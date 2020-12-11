@@ -45,7 +45,7 @@ void min_bucket<T>::insert(const T& x)
     items[size] = x; // place x at the end
   }
   int i = count-1;
-  while (i >= 0  && items[i] > items[i+1]) {
+  while (i >= 0  && items[i+1] < items[i]) {
     std::swap(items[i], items[i+1]);
     i--;
   }
